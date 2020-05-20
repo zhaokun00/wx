@@ -1,0 +1,24 @@
+<!--pages/startDemo/startDemo.wxml-->
+<view>
+app.json数据内容解释
+(1)一个应用小程序包括最基本的两种配置文件，一种是全局的app
+.json和页面自己的page.json,在配置文件中国不能出现注释
+(2)app.json是当前小程序的全局配置,包括了小程序的所有页面路径、界面表现、网络超时时间、底部tab
+(3)page字段:用于描述当前小程序所有页面路径,目的是为了让微信客户端知道当前小程序页面定义在哪些目录中,并且启动页面即是定义的第一个页面
+(4)page.json:用于表示当前目录下的页面相关的配置,开发者可以独立定义每一个页面的一些属性,如顶部属性、是否允许下拉刷新等等,页面的配置只能设置app.json部分window配置项的内容，页面汇总配置项会覆盖app.json的window中相同的配置项
+{
+  "pages":[
+    "pages/startDemo/startDemo", //定义了页面的路径
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff", //导航栏背景颜色
+    "navigationBarTitleText": "微信示例程序", //导航栏标题文字
+    "navigationBarTextStyle":"black", //导航栏文字
+    "enablePullDownRefresh":true, //是否开启下来刷新
+    "backgroundColor":"#000",//window背景颜色,在下拉说会出现window,而非上面的导航栏的颜色
+    "pageOrientation":"portrait" //显示屏横屏或者竖屏的显示,要想启用,手机中必须允许横竖屏切换
+  }
+}
+</view>
+

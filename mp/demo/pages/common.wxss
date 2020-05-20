@@ -1,0 +1,5 @@
+/* 类选择器定义 */
+.small-p {
+padding:10rpx;
+margin: 20rpx;
+}

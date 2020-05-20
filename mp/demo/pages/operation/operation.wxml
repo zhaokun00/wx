@@ -1,0 +1,53 @@
+<!--pages/operation/operation.wxml-->
+<!-- 运算 -->
+<view>{{num}}</view>
+<!-- <view>{{j}}</view> -->
+
+<!-- 布尔型变量,错误写法 -->
+<!-- <view hidden="false">hide</view> -->
+<!--  布尔变量,正确的写法-->
+<view hidden="{{true}}">hide</view>
+<!-- 三位运算符,在标签属性用法 -->
+<view hidden="{{flag?true:false}}">hide</view>
+<!-- 算数运算 -->
+<!--  输出10 + 1 -->
+<view>{{num}} + 1</view>
+<!-- 输出11,变量一定要用两个大括号括起来 -->
+<view>{{num + 1}}</view>
+
+<!-- 逻辑运行,使用wx:if 
+  1.在框架中,使用wx:if="{{condition}}"来判断是否需要渲染该代码块
+  2.是否显示或隐藏组件,如果频繁切换用属性hidden,如果不常用使用wx:if
+-->
+<view wx:if="{{num === 10}}">逻辑运算</view>
+
+<!-- 字符串拼接 -->
+<!-- 输出:name:zhaokun -->
+<view>name:{{name}}</view> 
+<!-- 输出:name:zhaokun,其中name字符串用双引号标记起来-->
+<view>{{"name:" + name}}</view>
+
+<!-- 循环列表 ,列表元素为基础类型变量-->
+<view wx:for="{{list}}"> {{index}} : {{item}}</view>
+<!-- 列表元素为对象,下标变量名默认为index,项的变量名默认为item -->
+<view wx:for="{{array}}"> {{index}} : {{item.id}} : {{item.name}}</view>
+<!-- wx:for-index指定数组当前下标的变量名,wx:for-item指定数组当前元素的变量名 -->
+<view wx:for="{{array}}" wx:for-index="idx" wx:for-item="itemName">
+{{idx}} : {{itemName.id}} : {{itemName.name}}
+</view>
+<!-- wx:key用来提高数组渲染的性能
+  (1)绑定的值有如下选择
+  (2)string类型,表示循环项中唯一属性
+ -->
+<view wx:for="{{array}}" wx:key="id"> {{index}} : {{item.id}} : {{item.name}}</view>
+
+<!-- 渲染一个包含多节点的结构块,block最终不会变成真正的dom元素 -->
+<block wx:for="{{[1, 2, 3]}}" wx:key="*this" >
+<view> {{index}}: </view>
+<view> {{item}} </view>
+</block>
+
+<view wx:for="{{[1, 2, 3]}}">
+<view> {{index}}: </view>
+<view> {{item}} </view>
+</view>

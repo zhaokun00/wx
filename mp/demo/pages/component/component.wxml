@@ -1,0 +1,20 @@
+<!--pages/component/component.wxml-->
+<!-- text组件
+  (1)selectable属性:文本是否可选
+  (2)decode:是否解码
+  (3)只能嵌套text标签,下面的view标签不生效
+ -->
+<text selectable="false">text组件</text>
+<text decode="true">text组件 普&nbsp;通</text>
+<text>
+嵌套text<text>嵌套text</text>
+<!-- <view>
+view
+</view> -->
+</text>
+
+<!-- 
+  image组件
+  (1)src:设置图片源地址
+ -->
+<image src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1589897283&di=5562955a75b936b875854a78609cca62&src=http://a3.att.hudong.com/14/75/01300000164186121366756803686.jpg"></image>

@@ -1,0 +1,18 @@
+<!--pages/eventbind/eventbind.wxml-->
+<view>绑定事件</view>
+<!-- 
+    (1)小程序中给组件绑定事件,通过bind关键字来实现,如bindtap,bindinpt等,不同的组件支持不同的绑定事件 
+    (2)绑定事件时不能带参数不能带括号
+    (3)事件传值通过标签自定义属性,data-为固定写法,后面的id可以发生变化
+-->
+<input bindinput="handInput" data-id="id-1" data-name="zk" value="1.0.0"></input>
+
+<input bindinput="handInput" data-id="id-2"></input>
+
+<!-- 按钮注册点击事件 
+     class定义了类选择器,用于加载样式
+-->
+<button class="small-p" bindtap="handleClick"
+>
+点击
+</button>

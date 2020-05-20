@@ -1,12 +1,16 @@
 {
   "pages":[
-    "pages/index/index",
+    "pages/component/component",
+    "pages/eventbind/eventbind",
+    "pages/operation/operation",
+    "pages/databind/databind",
+    "pages/startDemo/startDemo",
     "pages/logs/logs"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "微信示例程序",
     "navigationBarTextStyle":"black"
   },
   "style": "v2",

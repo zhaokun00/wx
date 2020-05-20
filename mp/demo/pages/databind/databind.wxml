@@ -1,0 +1,48 @@
+<!--pages/databind/databind.wxml-->
+<!-- 
+  测试:数据绑定功能 
+  (1)数据的定义在.js文件中的data对象中,在微信小程序中采用的是json格式的数据类型,但与标准的json格式
+    有所不同,不用加""引号即可
+  data: {
+    message:'zhaokun', //定义字符串变量
+    id:0, //定义整型变量
+    checked:true, //定义布尔变量
+    list:[1,2,3], //定义数组变量
+    object:{ //定义对象变量
+      name:'00',
+      age:32
+    },
+    list_object:[ //对象数组对象
+      {name:'zk',
+      age:32},
+      {name:'00',
+      age:32
+    }
+    ],
+    t:32.2 //定义浮点型数据
+  },
+-->
+<!-- 1.普通数据的绑定 
+  (1)变量用两个大括号括起来
+-->
+<view>{{message}}</view>
+<!-- 2.组件属性数据的绑定 
+  (1)标签的属于值属于字符串,要用""括起来
+  (2)在""中用两个{}大括号括起来
+-->
+<view id="item-{{id}}">{{id}}</view>
+<!-- 
+    bool类型数据绑定 
+    注意事项:
+      1.不能直接写checked="false"或者checked="true"
+      2.正确的写法checked="{{false}}"或者checked="{{true}}",必须用{{}}包起来
+-->
+<checkbox checked="{{checked}}"></checkbox>
+
+<view>{{list}}</view>
+
+<view>{{object.name}} {{object.age}}</view>
+
+<view>{{list_object[0].name}} {{list_object[0].age}}</view>
+
+<view>{{t}}</view>
