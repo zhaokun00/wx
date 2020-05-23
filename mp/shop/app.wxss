@@ -1,1 +1,63 @@
-/**app.wxss**/
+/**
+app.wxss
+(1)app.wxss为全局的样式文件,在该文件中定义了全局的样式
+(2)各page页面中.wxss文件可以覆盖全局的css配置
+**/
+/* 导入css配置文件 */
+@import "./styles/iconfont.wxss";
+
+/* 
+//设置窗口
+"window":{
+  "backgroundTextStyle":"light",
+  "navigationBarBackgroundColor": "#ff2d4a", //导航栏背景颜色
+  "navigationBarTitleText": "商城", //导航栏标题
+  "navigationBarTextStyle":"white" //导航栏字体颜色
+},
+//导航栏
+"tabBar": {
+    "color": "#999", //未选中字体颜色
+    "selectedColor": "#ff2d4a", //选中字体颜色
+    "backgroundColor": "black", //背景色
+    "position": "bottom", //tabBar位置
+    "borderStyle": "black", //tabBar边框颜色
+    "list": [ //list中至少有2个选项,如果有一个在编译时会报错
+      {
+        "pagePath": "pages/index/index", //选中跳转的页面,通过点击可以跳转到相关的界面
+        "text": "首页", //显示的问题
+        "iconPath": "./icons/home.png", //未选中显示的图片
+        "selectedIconPath": "./icons/home-o.png" //选中显示的图片
+      }
+    ]
+  }
+*/
+/* 在wxss文件中不支持通配符* */
+page,
+view,
+text,
+swiper,
+swiper-item,
+image,
+navigator {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+/* 定义主题颜色 */
+page {
+  --themeColor: #eb4450;
+  /* color: red; */
+  /* 定义成rpx单位, rpx:可以根据屏幕宽度进行自适应,规定屏幕为750rpx,如在iphone6上
+     屏幕宽度为375px,则750rpx = 375px,即1px=2rpx,下面定义文字大小为14px,则使用rpx则为28rpx
+     (1)定义成rpx的形式,字体大小会随着屏幕的变化而发生变化
+     (2)定义成px的形式,字体大小不会随着屏幕的大小变化
+     (3)在开发小程序时建议使用iphone6作为视觉稿的标准
+  */
+  /* font-size: 28rpx; */
+  /* font-size: 28px; */
+}
+
+img {
+  width: 100%;
+}
+

@@ -1,1 +1,66 @@
 <!--index.wxml-->
+<!-- 示例:使用iconfont -->
+<!-- <text class="iconfont icon-shoucang1"></text> -->
+<view>
+		<!-- 搜索框 -->
+		<searchInput></searchInput>
+		<!-- 轮播图 
+    (1)swipter标签存在默认的宽度与高度:100%的宽度与150px的高度
+    (2)image标签存在默认的宽度与高度:320px * 240px,如果采用默认的方式,将来图片会image宽度相同,但高度不定
+    (3)设计图片和轮播图
+      1.原图高度: 750px * 340px
+      2.让图片的宽度等于100%(在wxss文件中设置image样式)，高度自适应(使用mode=widthFix,缩放模式，宽度不变，高度自动变化，保持原图宽高比不变)
+      3.让swipter标签高度变成和图片的高相同,如果不设置该项的的话,当往大变换机型时,由于swipter的高度是一定的,而图片高度会变大,则图片只会显示部分图片
+  -->
+		<view>
+			<!-- 使用组件swipter与swipter-item相结合轮播图 -->
+			<swiper indicator-dots autoplay circular class="class_swiper">
+				<swiper-item wx:for="{{swiperList}}" wx:key="goods_id">
+					<navigator>
+						<image src="{{item.image_src}}" mode="widthFix"></image>
+					</navigator>
+				</swiper-item>
+			</swiper>
+		</view>
+
+		<!-- 导航图的第一种写法 -->
+		<view class="index_cate">
+			<navigator wx:for="{{catesList}}" wx:key="name" url="/pages/category/category" open-type="switchTab">
+				<image src="{{item.image_src}}" mode="widthFix"></image>
+			</navigator>
+		</view>
+
+		<!-- 导航图的第二种写法 -->
+		<!-- <view  class="index_cate">
+      <view wx:for="{{catesList}}">
+          <navigator>
+            <image src="{{item.image_src}}" mode="widthFix"></image>
+          </navigator>
+      </view>
+    </view> -->
+	</view>
+
+	<view class="index_floor" wx:for="{{floorList}}" wx:for-item="item1" wx:for-index="index1" wx:key="name">
+		<view class="floor_title" >
+			<image src="{{item1.floor_title.image_src}}" mode="widthFix"></image>
+		</view>
+
+    <view class="floor_list">
+    <!-- 如果navigator中没有子元素,宽度和高度为0 -->
+      <navigator wx:for="{{item1.product_list}}" wx:for-item="item2" wx:for-index="index2" wx:key="name" url="{{util.urlFormat(item2.navigator_url)}}">
+        <!-- scaleToFile:缩放模式,不保持纵横比例,使图片的宽高完全拉伸至填满image元素 -->
+        <image src="{{item2.image_src}}" mode="{{index2===0 ? 'widthFix' : 'scaleToFill'}}"></image>
+      </navigator>
+    </view>
+
+    <!-- <view class="index_floor" wx:for="{{floorList}}" wx:for-item="item1" wx:for-index="index1" wx:key="name">
+    <view class="floor_title">
+      <image src="{{item1.floor_title.image_src}}" mode="widthFix" />
+    </view>
+    <view class="floor_list">
+      <navigator wx:for="{{item1.product_list}}" wx:for-item="item2" wx:for-index="index2" wx:key="name" url="{{util.urlFormat(item2.navigator_url)}}">
+        <image src="{{item2.image_src}}" mode="{{index2===0 ? 'widthFix' : 'scaleToFill'}}" />
+      </navigator>
+    </view>
+  </view> -->
+</view>
