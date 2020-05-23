@@ -20,12 +20,16 @@ Page({
 
   handelTap: function(e) {
     console.log(e);
+    // 获取传递过来的索引值
     const tapIndex = e.currentTarget.dataset.index;
-
+    // 根据索引值,修改右侧项的内容
+    const rightList = this.Cate[tapIndex].children;
     this.setData(
       {
         // 设置选中的标签的索引值
-        tapIndex
+        tapIndex,
+        // 设置右侧项内容
+        rightList,
       }
     );
   },
@@ -42,7 +46,7 @@ Page({
         this.Cate = result.data.message;
         let leftList = this.Cate.map(v => v.cat_name);
         // 获取json数据中的各种数据
-        let rightList = result.data.message[0].children;
+        let rightList =  this.Cate[0].children;
         // console.log(leftList);
         // console.log(rightList);
 
