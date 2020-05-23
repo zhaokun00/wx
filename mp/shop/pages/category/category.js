@@ -36,7 +36,7 @@ Page({
 
    // 获取 分类导航数据
    getCateList:function () {
-    request({url:'https://api-hmugo-web.itheima.net/api/public/v1/categories'}).then(
+    request({url:'/categories'}).then(
       // 箭头函数,主要是匿名函数,result是传入参数
       result => {
         console.log(result);

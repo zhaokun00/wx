@@ -15,7 +15,7 @@ Page({
   },
 
   getSwiperList: function() {
-    request({url:'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata'}).then(
+    request({url:'/home/swiperdata'}).then(
       // 箭头函数,主要是匿名函数,result是传入参数
       result => {
         console.log(result);
@@ -34,7 +34,7 @@ Page({
   },
 
   getCatesList: function() {
-    request({url:'https://api-hmugo-web.itheima.net/api/public/v1/home/catitems'}).then(
+    request({url:'/home/catitems'}).then(
       result => {
         console.log(result);
         this.setData(
@@ -47,7 +47,7 @@ Page({
   },
 
   getfloorList: function() {
-    request({url:'https://api-hmugo-web.itheima.net/api/public/v1/home/floordata'}).then(
+    request({url:'/home/floordata'}).then(
       result => {
         console.log(result);
         this.setData(
