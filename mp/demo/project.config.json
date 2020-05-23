@@ -48,7 +48,14 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "测试--未定义页面",
+					"pathName": "pages/lifecycle/nopage",
+					"scene": null
+				}
+			]
 		}
 	}
 }

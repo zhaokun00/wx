@@ -1,0 +1,9 @@
+<!--pages/lifecycle/lifecycle.wxml-->
+
+<!-- 不会调用回调函数onUnload方法,当再次进来时,不会调用onLoad方法,show方法会首先会被调用,data中的数据会保持离开页面时的数据 -->
+<navigator url="/pages/startDemo/startDemo" open-type="navigate">跳转,但不关闭该页面</navigator>
+
+<!-- 会调用回调函数onUnload方法,当再次进来时,会调用onLoad方法,data中的数据会被重新初始化 -->
+<navigator url="/pages/startDemo/startDemo" open-type="redirect">跳转,关闭该页面</navigator>
+
+<view>{{s}}</view>

@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/lifecycle/lifecycle",
     "pages/component/component",
     "pages/eventbind/eventbind",
     "pages/operation/operation",
