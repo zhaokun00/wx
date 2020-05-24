@@ -75,6 +75,8 @@ Page({
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
+   * 在页面的.json文件中进行配置属性,只有设置使能下拉刷新的页面才能进行下拉,其他页面不能进行下拉动作
+   * "enablePullDownRefresh": true
    */
   onPullDownRefresh: function () {
     console.log("lifecycle:onPullDownRefresh");
@@ -82,9 +84,18 @@ Page({
 
   /**
    * 页面上拉触底事件的处理函数
+   * 只有当下拉到最底部时才调用函数
    */
   onReachBottom: function () {
     console.log("lifecycle:onReachBottom");
+  },
+
+  /**
+   * 页面滚动时会回调该函数
+   * 只要页面发生滚动就会调用该函数
+   */
+  onPageScroll: function () {
+    console.log("lifecycle:onPageScroll");
   },
 
   /**
@@ -92,5 +103,10 @@ Page({
    */
   onShareAppMessage: function () {
     console.log("lifecycle:onShareAppMessage");
+  },
+
+  // 屏幕旋转时会回调该函数,在*.json文件中加上配置"pageOrientation": "auto"
+  onResize: function () {
+    console.log("lifecycle:onResize");
   }
 })

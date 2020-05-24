@@ -8,7 +8,7 @@ export const request = (params) => {
       ...params,
       url: baseUrl + params.url,
       success: (result) => {
-        // console.log("success");
+        console.log("success");
         // 成功回调的函数
         resolve(result); 
       },

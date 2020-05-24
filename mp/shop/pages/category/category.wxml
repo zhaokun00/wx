@@ -17,6 +17,9 @@
 					<view class="title_delimiter">/</view>
 				</view>
 				<view class="goods_container">
+				<!-- (1)跳转到其他页面,通过url传递参数,用?号将url和参数分割开来,传递过去的数据为json格式数据,如果传递多个数据中间用&&分割开来,例如cid={{item2.cat_id}}&&name={{item2.cat_id}} 
+						 (2)在模拟左下角可以对页面路径和页面参数进行查看,给另外一个页面传递过去的数据,可以从从回调函数onLoad函数中获取
+				-->
 					<navigator wx:for="{{item1.children}}" wx:for-item="item2" wx:for-index="index2" wx:key="cat_id" url="/pages/goods_list/goods_list?cid={{item2.cat_id}}">
 						<view>
 							<image src="{{item2.cat_icon}}" mode="widthFix" />

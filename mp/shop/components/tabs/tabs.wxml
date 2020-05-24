@@ -1,0 +1,10 @@
+<view class="title" >
+<!-- tabs变量为.js文件中properties属性tabs变量,同时会传递私有数据-->
+  <view class="{{item.isActive ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="id" bindtap="tabsTap" data-id="{{item.id}}">
+  {{item.name}}
+  </view>
+</view>
+<!-- 使用slot控件,在使用组件时,就可以在该组件中嵌套其他组件 -->
+<view class="content">
+  <slot></slot>
+</view>

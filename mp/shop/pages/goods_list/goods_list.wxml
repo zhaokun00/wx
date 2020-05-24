@@ -1,0 +1,20 @@
+<view>
+	<searchInput></searchInput>
+	<!-- 如果在.json文件中没有引入自定义控件的话,该处的控件的宽高=0 -->
+	<tabs tabs="{{tabs}}" bindtabsChange="tabsItemChange">
+		<block wx:if="{{tabs[0].isActive===true}}">
+			<navigator wx:for="{{goodList}}" wx:key="goods_id">
+				<view class="goods_image">
+					<image mode="widthFix" src="{{item.goods_small_logo?item.goods_small_logo:'https://ww1.sinaimg.cn/large/007rAy9hgy1g24by9t530j30i20i2glm.jpg'}}" />
+				</view>
+				<view class="goods_info">
+					<view class="info_name">{{item.goods_name}}</view>
+					<view class="info_price">¥{{item.goods_price}}</view>
+				</view>
+			</navigator>
+		</block>
+		<block wx:if="{{tabs[1].isActive===true}}">1</block>
+		<block wx:if="{{tabs[2].isActive===true}}">2</block>
+	</tabs>
+
+</view>

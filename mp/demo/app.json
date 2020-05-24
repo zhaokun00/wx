@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/lifecycle/lifecycle",
     "pages/component/component",
+    "pages/lifecycle/lifecycle",
     "pages/eventbind/eventbind",
     "pages/operation/operation",
     "pages/databind/databind",

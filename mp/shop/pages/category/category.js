@@ -13,6 +13,8 @@ Page({
     rightList:[],
     //选中的左侧序号
     tapIndex: 0,
+    // 设置每次点击左边选项时,右边内容位置都是从开始进行
+    scrollTop:0,
   },
 
   //总数据
@@ -30,6 +32,8 @@ Page({
         tapIndex,
         // 设置右侧项内容
         rightList,
+
+        scrollTop:0
       }
     );
   },
