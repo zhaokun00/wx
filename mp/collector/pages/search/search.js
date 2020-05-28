@@ -5,22 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    goods: [{
-        goods_id: 0,
-        goods_name: '电视',
-        goods_price: 1000
-      },
-      {
-        goods_id: 1,
-        goods_name: '冰箱',
-        goods_price: 1000
-      },
-      {
-        goods_id: 2,
-        goods_name: '洗衣机',
-        goods_price: 1000
-      },
-    ],
+    
     // 存储输入框的值
     inputValue: ''
   },

@@ -1,0 +1,21 @@
+
+page,
+view,
+text,
+swiper,
+swiper-item,
+image,
+navigator {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+/* 定义主题颜色 */
+page {
+  --themeColor: #eb4450;
+}
+
+img {
+  width: 100%;
+}
+

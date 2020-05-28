@@ -1,0 +1,38 @@
+<view class="pyg_task">
+	<!-- <searchInput></searchInput> -->
+	<!-- 如果在.json文件中没有引入自定义控件的话,该处的控件的宽高=0 -->
+	<tabs class="tabs" tabs="{{tabs}}" bindtabsChange="tabsItemChange">
+		<block wx:if="{{tabs[0].isActive===true}}">
+			<view class="device_attr {{index % 2 === 0 ? 'single' : ' '}}" wx:for="{{deviceData}}" wx:key="deviceId">
+				<view class="attr_name">{{item.attrName}}</view>
+				<view class="attr_value">{{item.attrValue}}℃</view>
+			</view>
+		</block>
+
+		<block wx:if="{{tabs[1].isActive===true}}">
+		   <!-- 时间段 -->  
+    <view class="picker_group">  
+      <picker mode="date" value="{{date}}"  end="{{date2}}" bindchange="bindDateChange">  
+        <view class="picker">  
+          {{date}}  
+        </view>  
+      </picker>  
+      至  
+      <picker mode="date" value="{{date2}}" start="{{date}}" end="2050-01-01" bindchange="bindDateChange2">  
+        <view class="picker">  
+          {{date2}}  
+        </view>  
+      </picker>        
+    </view>  
+			<view class="h_root" wx:for="{{historyData}}" wx:key="time" wx:for-index="index1" wx:for-item="item1">
+				<view class="h_time" > {{item1.time}}</view>
+				<view class="h_device_attr {{index2 % 2 === 0 ? 'single' : ' '}}" wx:for="{{item1.deviceData}}" wx:key="time" wx:for-index="index2" wx:for-item="item2">
+          <view class="h_attr_name">{{item2.attrName}}</view>
+          <view class="h_attr_value">{{item2.attrValue}}℃</view>
+				</view>
+
+			</view>
+</block>
+</tabs>
+
+</view>

@@ -1,0 +1,25 @@
+/* components/searchInput/searchInput.wxss */
+
+.search_input {
+  /* 设置组件的高度 */
+  height: 90rpx;
+  /* 设置内边距 */
+  padding: 10rpx;
+  /* 设置背景颜色 */
+  background-color: var(--themeColor);
+}
+navigator {
+  /* 继承父元素的高度 */
+  height: 100%;
+  display: flex;
+  /* 内容水平方向居中 */
+  justify-content: center;
+  /* 内容竖直方向居中 */
+  align-items: center;
+  /* 设置背景颜色 */
+  background-color: #fff;
+  /* 设置边框弧度 */
+  border-radius: 10rpx;
+  /* 设置文字颜色 */
+  color: #666;
+}

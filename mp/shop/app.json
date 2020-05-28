@@ -1,11 +1,14 @@
 {
   "pages":[
+    "pages/time/time",
+    "pages/login/login",
     "pages/index/index",
     "pages/category/category",
     "pages/goods_list/goods_list",
     "pages/cart/cart",
     "pages/user/user",
     "pages/search/search"
+    
   ],
   "window":{
     "backgroundTextStyle":"light",

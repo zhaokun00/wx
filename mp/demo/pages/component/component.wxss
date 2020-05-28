@@ -1,1 +1,228 @@
-/* pages/component/component.wxss */
+page {
+  height: 100%;
+  background-color: #cccccc;
+}
+
+.myclass {
+  /* 标记字体颜色 */
+  color: red; 
+  /* 标记背景颜色 */
+  background-color: yellow;
+  /* 标记宽度,等于父组件宽度的50% */
+  width: 50%; 
+  /* 标记高度,等于父组件高度的50% */
+  height: 100px;
+  display: flex;
+  /* padding-top: 10rpx; */
+}
+
+.inclass {
+  background-color: black;
+  margin-left: 20rpx;
+  /* margin-right: 20rpx; */
+  width: 100%;
+  height: 20%;
+
+  /* 单行显示 */
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
+
+  /* 多行显示 */
+  /* display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; */
+
+}
+
+.outclass {
+  /* 设置外边距 */
+  margin: 10px;
+  width: 200px;
+  height: 200px;
+  background-color: red;
+  /* 让容器变为伸缩盒子 */
+  display: flex;
+  /* float: right; */
+  /* 让里面的元素在一行显示 */
+  flex-direction: column;
+  /* 在一行显示的话,在竖直方向居中 */
+  /* align-items: center; */
+  /* 在一行显示水平方向居中 */
+  /* justify-content: center; */
+  /* 设置内边距 */
+  /* padding: 10px; */
+
+  /* flex-direction: row-reverse; */
+  bottom: 0px;
+  right: 0px;
+}
+
+.time {
+  background-color: white;
+  margin:30rpx 10rpx;
+  text-align: center;
+  border-radius: 10px;
+  height: 50rpx;
+  line-height: 50rpx;
+  color: #4178DF;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.device {
+  margin-bottom: 30rpx;
+}
+
+.row_element {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.element {
+  width: 16%; 
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 20rpx;
+  margin:10rpx;
+}
+
+.t_value {
+  margin-bottom: 5rpx;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: green;
+  border-bottom: #999 solid 2px;
+}
+
+.device_name {
+  margin-top: 5rpx;
+  font-size: 25rpx;
+  color: #4178DF;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
+
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+
+
+.h_device {
+  margin-bottom: 20rpx;
+}
+.h_te {
+  border-bottom: #fff solid 2rpx;
+}
+
+.h_time {
+  background-color: white;
+  margin:10rpx 10rpx;
+  text-align: center;
+  border-radius: 10px;
+  height: 50rpx;
+  line-height: 50rpx;
+  color: #4178DF;
+  font-size: 25rpx;
+  font-weight: bold;
+}
+
+.h_row_element {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.h_element {
+  flex: 1;
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  margin: 5rpx;
+}
+
+.h_t_value {
+  margin-bottom: 5rpx;
+  font-size: 25rpx;
+  color: green;
+  border-bottom: green solid 2px;
+}
+
+.h_device_name {
+  margin-top: 5rpx;
+  font-size: 20rpx;
+  color: #4178DF;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.tit_seabox{
+  width: calc( 100% - 64rpx );
+  background: #fff;
+  height: 60rpx;
+  padding:20rpx 32rpx;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.tit_seabox_bar{
+    width: calc( 100% - 32rpx );
+    height: 60rpx;
+    display: flex;
+    align-items: center;
+    border-radius: 30rpx;
+    background: #F5F5F5;
+    padding-left: 32rpx;
+}
+
+.tit_seabox_bar icon{
+  margin-right: 20rpx;
+}
+
+.tit_seabox input{
+  height:60rpx;
+  line-height:60rpx;
+  font-size:28rpx;
+  width:100%;
+  margin-right:32rpx;
+}
+.activity_add{
+  width:60rpx;
+  text-align:right;
+  border-left:4rpx solid #f2f2f2;
+  margin-left:20rpx;
+}
+.activity_add image{
+  width: 40rpx;
+  height: 40rpx;
+}
+.activity_seabtn{
+  font-size: 28rpx;
+  width: 70rpx;
+  text-align: right;
+}

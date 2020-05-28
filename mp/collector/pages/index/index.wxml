@@ -1,0 +1,20 @@
+<view class="pyg_task">
+	<searchInput></searchInput>
+	<view class="task_container">
+		<scroll-view class="right_menu" scroll-y scroll-top="{{scrollTop}}">
+			<view class="task_devices" wx:for="{{rightList}}" wx:for-index="index1" wx:for-item="item1" wx:key="task_id">
+				<view class="task_title">
+					<view class="title_name">{{item1.taskName}}</view>
+				</view>
+				<view class="devices_container">
+					<navigator wx:for="{{item1.devices}}" wx:for-item="item2" wx:for-index="index2" wx:key="deviceId" url="/pages/devices/devices?deviceId={{item2.deviceId}}&&deivceName={{item2.deivceName}}">				
+						<view>
+							<image src="{{item2.pics_sma}}" mode="widthFix" />
+							<view class="device_name">{{item2.deivceName}}</view>
+						</view>
+					</navigator>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+</view>

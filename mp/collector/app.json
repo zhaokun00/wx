@@ -1,0 +1,17 @@
+{
+  "pages":[
+    "pages/login/login",
+    "pages/index/index",
+    "pages/devices/devices",
+    "pages/search/search",
+    "pages/user/user"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#ff2d4a",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle":"white"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

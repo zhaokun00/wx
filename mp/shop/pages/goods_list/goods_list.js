@@ -26,6 +26,9 @@ Page({
     goodList: []
   },
 
+    //定义商品列表总页数
+    maxPagenum: 1,
+
   //获取商品列表请求参数
   goodParams: {
     query: '',
@@ -95,15 +98,35 @@ Page({
       result => {
         let goodList = result.data.message;
         console.log(goodList);
+        this.maxPagenum = Math.ceil(goodList.total / this.goodParams.pagesize)
+        console.log("商品最大页数:" + this.maxPagenum);
+
+        // 数组拼接的第1种形式
+        // let list = this.data.goodList.concat(goodList.goods);
+        // console.log(list);
+
         this.setData(
           {
-            goodList: goodList.goods,
+            // 数组拼接的第2种形式,用于下载到底部时加载下一页数据
+            // es6方式 [...],list = [...list1,...list2,...list3]; push 单个元素:list.push('aaa');
+            goodList: [...this.data.goodList, ...goodList.goods],
           }
         );
+
+        // 获取数组的长度
+        // console.log(this.data.goodList.length);
+
+        // 
+       
       }
     ).catch( //异常回调的函数
       err => {
         console.log(err);
+      }
+    ).finally(
+      res => {
+        // 当请求完数据,停止下拉刷新
+        wx.stopPullDownRefresh();
       }
     );
 
@@ -151,14 +174,27 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.goodParams.pagenum = 1,
+    this.data.goodList = []
+    this.getGoodsList()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    console.log("监听底部上啦事件");
+    if(this.goodParams.pagenum >= this.maxPagenum)
+    {
+      wx.showToast({
+        title: '已经没有数据啦',
+        icon: 'none',
+      })
+    }
+    else {
+      this.goodParams.pagenum++;
+      this.getGoodsList()
+    }
   },
 
   /**

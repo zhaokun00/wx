@@ -1,5 +1,5 @@
 <view class="search_input">
-  <input placeholder="请输入搜索商品名称" value="{{inputValue}}" bindinput="inputChange" />
+  <input placeholder="请输入任务或设备名称" value="{{inputValue}}" bindinput="inputChange" />
 </view>
 
 <navigator class="search_content" wx:for="{{goods}}" wx:key="goods_id">
