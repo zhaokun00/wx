@@ -1,38 +1,52 @@
-<view class="pyg_task">
-	<!-- <searchInput></searchInput> -->
-	<!-- 如果在.json文件中没有引入自定义控件的话,该处的控件的宽高=0 -->
-	<tabs class="tabs" tabs="{{tabs}}" bindtabsChange="tabsItemChange">
-		<block wx:if="{{tabs[0].isActive===true}}">
-			<view class="device_attr {{index % 2 === 0 ? 'single' : ' '}}" wx:for="{{deviceData}}" wx:key="deviceId">
-				<view class="attr_name">{{item.attrName}}</view>
-				<view class="attr_value">{{item.attrValue}}℃</view>
-			</view>
-		</block>
-
-		<block wx:if="{{tabs[1].isActive===true}}">
-		   <!-- 时间段 -->  
-    <view class="picker_group">  
-      <picker mode="date" value="{{date}}"  end="{{date2}}" bindchange="bindDateChange">  
-        <view class="picker">  
-          {{date}}  
-        </view>  
-      </picker>  
-      至  
-      <picker mode="date" value="{{date2}}" start="{{date}}" end="2050-01-01" bindchange="bindDateChange2">  
-        <view class="picker">  
-          {{date2}}  
-        </view>  
-      </picker>        
-    </view>  
-			<view class="h_root" wx:for="{{historyData}}" wx:key="time" wx:for-index="index1" wx:for-item="item1">
-				<view class="h_time" > {{item1.time}}</view>
-				<view class="h_device_attr {{index2 % 2 === 0 ? 'single' : ' '}}" wx:for="{{item1.deviceData}}" wx:key="time" wx:for-index="index2" wx:for-item="item2">
-          <view class="h_attr_name">{{item2.attrName}}</view>
-          <view class="h_attr_value">{{item2.attrValue}}℃</view>
+	<view>
+		<tabs class="tabs" tabs="{{tabs}}" bindtabsChange="tabsItemChange">
+			<block wx:if="{{tabs[0].isActive===true}}">
+				<view class='real'>
+					<view class="head_time">
+						<view class="time">2020-05-20 18:00:00</view>
+					</view>
+					<view class="row_element">
+						<view class="element" wx:for="{{deviceData}}" wx:key="deviceId">
+							<view class="t_value">{{item.attrValue}}℃</view>
+							<view class="device_name">{{item.attrName}}</view>
+						</view>
+					</view>
 				</view>
+			</block>
 
-			</view>
-</block>
-</tabs>
+			<block wx:if="{{tabs[1].isActive===true}}">
+				<view class="history">
+					<scroll-view scroll-y scroll-top="{{scrollTop}}">
+						<view class="picker_group">
+							<picker mode="date" value="{{startTime}}" end="{{endTime}}" bindchange="bindDateChange">
+								<view class="picker">
+									{{startTime}}
+								</view>
+							</picker>
+							至
+							<picker mode="date" value="{{endTime}}" start="{{startTime}}" end="2050-01-01" bindchange="bindDateChange2">
+								<view class="picker">
+									{{endTime}}
+								</view>
+							</picker>
+						</view>
 
-</view>
+						<view class="h_device" wx:for="{{[1, 2, 3, 4,5,6,7,8,9]}}" wx:key="*this">
+							<view class="h_te">
+							<view class="h_head_time">
+								<view class="h_time">2020-05-20 18:00:00</view>
+							</view>
+								<view class="h_row_element">
+									<view class="h_element" wx:for="{{[1, 2, 3, 4, 5, 6, 7,8]}}" wx:key="*this">
+										<view class="h_t_value">23.5</view>
+										<view class="h_device_name">T{{index}}</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</scroll-view>
+				</view>
+			</block>
+		</tabs>
+
+	</view>

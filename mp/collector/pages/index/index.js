@@ -1,7 +1,5 @@
-// pages/category/category.js
-import {
-  request
-} from "../../request/index.js";
+const globalData = require('../../global/data.js');
+const util = require('../../utils/util.js');
 
 Page({
 
@@ -9,10 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // 左侧栏数据
-    leftList: [],
+ 
     // 右侧栏数据
-    rightList: [{
+    rightList: [
+      {
       taskId: 1,
       taskName: '任务一',
       devices: [{
@@ -128,42 +126,13 @@ Page({
     });
   },
 
+  getTaskList: function () {
+
+  },
+  
   // 获取 分类导航数据
   getCateList: function () {
-    request({
-      url: '/categories'
-    }).then(
-      // 箭头函数,主要是匿名函数,result是传入参数
-      result => {
-        console.log(result);
-        // 必须声明号变量,否则会报错
-        // let l = result.data.message[0].cat_name;
-        // 从数组中获取某个字段中的数据
-        this.Cate = result.data.message;
-        let leftList = this.Cate.map(v => v.cat_name);
-        // 获取json数据中的各种数据
-        let rightList = this.Cate[0].children;
-        // console.log(leftList);
-        // console.log(rightList);
 
-        this.setData({
-          // 第一种赋值形式
-          // leftList:leftList,
-          // 第二种赋值形式 
-          leftList,
-          rightList,
-        });
-        // 将整个数据存储在缓存中,不能使用'{time:Date.now(),data:this.Cate}'这样的形式,这样相当于字符串
-        wx.setStorageSync('cates', {
-          time: Date.now(),
-          data: this.Cate
-        });
-      }
-    ).catch( //异常回调的函数
-      err => {
-        console.log(err);
-      }
-    );
   },
 
   /**
@@ -259,7 +228,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    console.log("333333333333333333");
   },
 
   /**

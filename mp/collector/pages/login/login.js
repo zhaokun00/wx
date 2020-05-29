@@ -1,37 +1,86 @@
-// pages/login/login.js
+// 导入全局变量
+const globalData = require('../../global/data.js');
+const util = require('../../utils/util.js');
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-    account:"",
-    password:""
+
   },
-  accountInput: function (e){
-    var content = e.detail.value;
-    console.log(content);
-    if(content!="") {
-      this.setData({
-        account:content
-      }
-      );
+
+  // 定义用户信息
+  userInfo: {
+    userName: '',
+    password: ''
+  },
+
+  accountInput: function (e) {
+    const username = e.detail.value;
+    if (username != "") {
+      this.userInfo.userName = username;
     }
+    /*
+        //变量定义在data数据中
+        if (username != "") {
+          this.data.userInfo.userName = username;
+          this.setData({
+            userInfo:this.data.userInfo
+          });
+        }
+    */
+
   },
-  pwdBlur: function (e) {
-    var password = e.detail.value;
-    if(password!="") {
-      this.setData(
-        {password:password}
-      );
+
+  passwordBlur: function (e) {
+    const password = e.detail.value;
+    if (password != "") {
+      this.userInfo.password = password;
     }
   },
 
   login: function (e) {
-    console.log("login");
-    wx.navigateTo({
-      url: '/pages/index/index',
-    });
+    const data = JSON.stringify(this.userInfo);
+    console.log(data);
+
+    if (this.userInfo.userName == "" || this.userInfo.password == "") {
+      wx.showToast({
+        title: globalData.tipList.accountError,
+        icon: 'none',
+      });
+
+      return;
+    }
+
+    util.httpRequest({
+      url: globalData.urlList.loginUrl,
+      data: data,
+      header: {
+        userName: this.userInfo.userName
+      },
+      timeout: 3000,
+    }).then(
+      result => {
+        console.log(result.code);
+        if (result.code == globalData.codeList.success) {
+          wx.redirectTo({
+            url: '/pages/index/index',
+          });
+        } else {
+          wx.showToast({
+            title: globalData.tipList.loginFailed,
+            icon: 'none',
+          });
+        }
+      }
+    ).catch(
+      err => {
+        console.log(err);
+        wx.showToast({
+          title: globalData.tipList.netFailed,
+          icon: 'none',
+        })
+      }
+    );
   },
 
   /**

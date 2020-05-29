@@ -8,7 +8,7 @@
 	<view class="hr"></view>
 	<view class="account">
 		<view class="title">密码</view>
-		<view class="num"><input bindblur="pwdBlur" placeholder="请输入密码" password placeholder-style="color:#999999;" /></view>
+		<view class="num"><input bindblur="passwordBlur" placeholder="请输入密码" password placeholder-style="color:#999999;" /></view>
 	</view>
 	<view class="hr"></view>
 	<button class="btn" type="primary" bindtap="login" style="width:90vw">登录</button>

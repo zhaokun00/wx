@@ -37,19 +37,19 @@ view
 <view> 222</view>
 </view> -->
 
-<view class="myclass">
+<!-- <view class="myclass">
 <view class="inclass">fff</view>
-<!-- <view class="inclass">aaa</view> -->
-</view>
+<view class="inclass">aaa</view>
+</view> -->
 
 <!-- 实时数据 -->
-<!-- <view class="time">2020-05-20 18:00:00</view>
+<view class="time">2020-05-20 18:00:00</view>
 <view class="row_element" >
 <view class="element" wx:for="{{[1, 2, 3,4,5,6,7,8]}}" wx:key="*this">
-  <view class="t_value">23.5℃</view>
+  <view class="t_value">23.511℃</view>
   <view class="device_name">T{{index}}1111111111111111111111111111111111111111111</view>
 </view>
-</view> -->
+</view>
 
 <!-- 历史数据 -->
 <!-- <view class="h_device" wx:for="{{[1, 2, 3, 4]}}" wx:key="*this">
@@ -69,11 +69,10 @@ view
 <!-- https://www.jianshu.com/p/c5e9c5ae861d -->
 
     <view class='tit_seabox'>
-        <!-- <view class="tit_seabox_bar {{addflag?'tit_seabox_add':''}} {{searchflag?'tit_start_search':''}}"> -->
         <view class="tit_seabox_bar">
             <icon type='search' size="32rpx"></icon>
             <input type="text" bindinput="searchList" bindconfirm="endsearchList" bindfocus='getfocus' bindblur="blursearch" confirm-type='search' value='{{searchstr}}' placeholder='请输入...' />
-            <!-- <icon bindtap='activity_clear' wx:if="{{searchflag}}" type='clear' size="28rpx"></icon> -->
+            
             <icon bindtap='activity_clear'  type='clear' size="28rpx"></icon>
         </view>
         <view wx:if="{{searchflag}}" bindtap='cancelsearch' class="activity_seabtn">取消</view>

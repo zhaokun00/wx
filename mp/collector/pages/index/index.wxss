@@ -7,8 +7,9 @@ page {
 }
 
 .task_container {
-  height: calc(100vh - 90rpx);
-  display: flex;
+  height: calc(100vh - 80rpx);
+  /* display: flex; */
+  overflow-y:auto;
 }
 
 .task_container .right_menu  {

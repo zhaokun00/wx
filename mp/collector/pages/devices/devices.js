@@ -1,14 +1,13 @@
-// pages/goods_list/goods_list.js
-import { request } from "../../request/index.js";
-
 Page({
 
+  index:0,
   /**
    * 页面的初始数据
    */
   data: {
-    date: '2018-01-01',//默认起始时间  
-    date2: '2018-01-24',//默认结束时间 
+    startTime: '2018-01-01',//默认起始时间  
+    endTime: '2018-01-24',//默认结束时间 
+    scrollTop: 0,
     //Tabs数据,定义父控件向子控件传递的数据,数据类型为数组类型
     tabs: [{
       id: 0,
@@ -283,6 +282,8 @@ Page({
     console.log("父组件获取到的数据");
     console.log(e);
     const id = e.detail.id;
+
+    this.index = id;
     const tabs = this.data.tabs;
 
     /**forEach的用法格式
@@ -335,6 +336,7 @@ Page({
   },
 
   getGoodsList: function() {
+    /*
     request({ url: "/goods/search", data: this.goodParams }).then(
       // 箭头函数,主要是匿名函数,result是传入参数
       result => {
@@ -354,12 +356,8 @@ Page({
             goodList: [...this.data.goodList, ...goodList.goods],
           }
         );
-
         // 获取数组的长度
-        // console.log(this.data.goodList.length);
-
-        // 
-       
+        // console.log(this.data.goodList.length);       
       }
     ).catch( //异常回调的函数
       err => {
@@ -371,7 +369,7 @@ Page({
         wx.stopPullDownRefresh();
       }
     );
-
+    */
 },
 
   /**

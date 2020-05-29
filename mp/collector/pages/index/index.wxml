@@ -8,8 +8,8 @@
 				</view>
 				<view class="devices_container">
 					<navigator wx:for="{{item1.devices}}" wx:for-item="item2" wx:for-index="index2" wx:key="deviceId" url="/pages/devices/devices?deviceId={{item2.deviceId}}&&deivceName={{item2.deivceName}}">				
-						<view>
-							<image src="{{item2.pics_sma}}" mode="widthFix" />
+						<view> 
+							<image lazy-load src="{{item2.pics_sma}}" mode="widthFix" />
 							<view class="device_name">{{item2.deivceName}}</view>
 						</view>
 					</navigator>

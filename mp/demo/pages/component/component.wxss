@@ -107,10 +107,6 @@ page {
   margin-top: 5rpx;
   font-size: 25rpx;
   color: #4178DF;
-  /* overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap; */
-
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -118,8 +114,6 @@ page {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 }
-
-
 
 .h_device {
   margin-bottom: 20rpx;
@@ -169,10 +163,6 @@ page {
   margin-top: 5rpx;
   font-size: 20rpx;
   color: #4178DF;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  /* white-space: nowrap; */
-
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;

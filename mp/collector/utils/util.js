@@ -14,6 +14,24 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const request = (params) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      ...params,
+      method: 'POST',
+      success: (result) => {
+        console.log(result);
+        resolve(result.data);
+      },
+      fail: (err) => {
+        console.log("请求服务器失败");
+        reject(err);
+      },
+    })
+  });
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  httpRequest: request
 }

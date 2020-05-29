@@ -1,7 +1,21 @@
-<view class="search_input">
-  <input placeholder="请输入任务或设备名称" value="{{inputValue}}" bindinput="inputChange" />
-</view>
+<!-- <view class="search_input">
+	<input placeholder="请输入任务或设备名称" value="{{inputValue}}" bindinput="inputChange" />
+</view> -->
 
-<navigator class="search_content" wx:for="{{goods}}" wx:key="goods_id">
-  <view class="{{index % 2 === 0 ? 'active' : ' '}}">{{item.goods_name}}</view>
-</navigator>
+<view>
+	<view class='title'>
+		<view class='tit_seabox'>
+			<icon type='search' size="40rpx"></icon>
+			<input type="text" bindinput="searchList" bindconfirm="endsearchList" bindfocus='getfocus' bindblur="blursearch" confirm-type='search' value='{{searchstr}}' placeholder='请输入任务或设备名称' />
+			<icon bindtap='activity_clear' type='clear' size="35rpx"></icon>
+		</view>
+	</view>
+
+	<view class="content">
+		<scroll-view scroll-top="{{scrollTop}}">
+			<navigator class="search_content" wx:for="{{records}}" wx:key="id">
+				<view class="{{index % 2 === 0 ? 'active' : ' '}}">{{item.task}} {{item.device}}</view>
+			</navigator>
+		</scroll-view>
+	</view>
+</view>
