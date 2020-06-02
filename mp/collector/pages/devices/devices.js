@@ -1,12 +1,13 @@
+const globalData = require('../../global/data.js');
+const util = require('../../utils/util.js');
+
 Page({
 
-  index:0,
   /**
    * 页面的初始数据
    */
   data: {
-    startTime: '2018-01-01',//默认起始时间  
-    endTime: '2018-01-24',//默认结束时间 
+ 
     scrollTop: 0,
     //Tabs数据,定义父控件向子控件传递的数据,数据类型为数组类型
     tabs: [{
@@ -19,357 +20,200 @@ Page({
       isActive: false
     }],
 
-    deviceData: [
-      {
-        deviceId:1,
-        deviceName:'T1',
-        attrName:'T1',
-        attrValue:23.5,
-        attrUnit:'℃'
-      },
-      {
-        deviceId:2,
-        deviceName:'T2',
-        attrName:'T2',
-        attrValue:23.5,
-        attrUnit:'℃'
-      },
-      {
-        deviceId:3,
-        deviceName:'T3',
-        attrName:'T3',
-        attrValue:23.5,
-        attrUnit:'℃'
-      },
-      {
-        deviceId:4,
-        deviceName:'T4',
-        attrName:'T4',
-        attrValue:23.5,
-        attrUnit:'℃'
-      },
-      {
-        deviceId:5,
-        deviceName:'T5',
-        attrName:'T5',
-        attrValue:23.5,
-        attrUnit:'℃'
-      },
-      {
-        deviceId:6,
-        deviceName:'T6',
-        attrName:'T6',
-        attrValue:23.5,
-        attrUnit:'℃'
-      },
-      {
-        deviceId:7,
-        deviceName:'T7',
-        attrName:'T7',
-        attrValue:23.5,
-        attrUnit:'℃'
-      },
-      {
-        deviceId:8,
-        deviceName:'T8',
-        attrName:'T8',
-        attrValue:23.5,
-        attrUnit:'℃'
-      }
-    ],
+    //设备实时列表
+    deviceRealTimeData: {
+      // time: '',
+      // attributes: []
+    },
 
-    historyData:[
-      {
-        time:'2020-03-25',
-        deviceData: [
-          {
-            deviceId:1,
-            deviceName:'T1',
-            attrName:'T1',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:2,
-            deviceName:'T2',
-            attrName:'T2',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:3,
-            deviceName:'T3',
-            attrName:'T3',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:4,
-            deviceName:'T4',
-            attrName:'T4',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:5,
-            deviceName:'T5',
-            attrName:'T5',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:6,
-            deviceName:'T6',
-            attrName:'T6',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:7,
-            deviceName:'T7',
-            attrName:'T7',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:8,
-            deviceName:'T8',
-            attrName:'T8',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-        ]
-      },
-      {
-        time:'2020-03-26',
-        deviceData: [
-          {
-            deviceId:1,
-            deviceName:'T1',
-            attrName:'T1',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:2,
-            deviceName:'T2',
-            attrName:'T2',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:3,
-            deviceName:'T3',
-            attrName:'T3',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:4,
-            deviceName:'T4',
-            attrName:'T4',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:5,
-            deviceName:'T5',
-            attrName:'T5',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:6,
-            deviceName:'T6',
-            attrName:'T6',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:7,
-            deviceName:'T7',
-            attrName:'T7',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:8,
-            deviceName:'T8',
-            attrName:'T8',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-        ]
-      },
-      {
-        time:'2020-03-27',
-        deviceData: [
-          {
-            deviceId:1,
-            deviceName:'T1',
-            attrName:'T1',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:2,
-            deviceName:'T2',
-            attrName:'T2',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:3,
-            deviceName:'T3',
-            attrName:'T3',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:4,
-            deviceName:'T4',
-            attrName:'T4',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:5,
-            deviceName:'T5',
-            attrName:'T5',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:6,
-            deviceName:'T6',
-            attrName:'T6',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:7,
-            deviceName:'T7',
-            attrName:'T7',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-          {
-            deviceId:8,
-            deviceName:'T8',
-            attrName:'T8',
-            attrValue:23.5,
-            attrUnit:'℃'
-          },
-        ]
-      }
-    ],
-    //商品列表数据
-    goodList: []
+    //设备历史列表
+    deviceHistoryData: {
+      historyData:[],
+      // pageTotal: 0,
+      // historyData:[
+      //   {
+      //     time: '',
+      //     attributes:[
+      //     ]
+      //   }
+      // ]
+    },
+
+    startTime: 0,
+    endTime: 0,
+
+    startShowTime: '',
+    endShowTime: '',
   },
 
-    //定义商品列表总页数
-    maxPagenum: 1,
-
-  //获取商品列表请求参数
-  goodParams: {
-    query: '',
-    cid: '',
-    pagenum: 1,
-    pagesize: 10
+  /**
+   * 0: 实时数据
+   * 1: 历史数据
+   */
+  index:0,
+  // 实时数据请求参数
+  realTimeParamsReq: {
+    taskNum: '',
+    deviceNum: '',
   },
+
+  // 请求历史数据参数
+  historyParamsReq: {
+    taskNum: '',
+    deviceNum: '',
+    startTime: 0,
+    endTime: 0,
+    pageSize: 1,
+    pageNum: 10,
+  },
+
+  maxPageNum: 1,
 
   tabsItemChange: function (e) {
-    console.log("父组件获取到的数据");
     console.log(e);
-    const id = e.detail.id;
 
-    this.index = id;
+    this.index = e.detail.id;
     const tabs = this.data.tabs;
 
-    /**forEach的用法格式
-     * 数组名.forEach(function(item-单项元素值, index-索引){console.log(item);}）
-     */
     tabs.forEach(
-      (v, i) => i === id ? v.isActive = true : v.isActive = false
+      (v, i) => i === this.index ? v.isActive = true : v.isActive = false
     )
-    /*
-    tabs.forEach(function(item,index){
-      if(index == id) {
-        item.isActive = true;
-      }
-      else {
-        item.isActive = false;
-      }
-    });
-    */
+
     this.setData({
       tabs
-    })
+    });
 
-    /*
-    //==只是判断值,===判断类型和值1 == "1" // true,1 === "1" // false
-    //测试==与===运算符
-    let a = 1;
-    let b = 1;
-    let c = "1";
-    if(a === b) {
-      console.log("a===b");
+    if(this.index == 0) {
+      this.getDeviceRealTimeData();
     }
     else {
-      console.log("a!===b");
+      this.getDeviceHistoryData();
     }
-
-    if(a === c) {
-      console.log("a===c");
-    }
-    else {
-      console.log("a!===c");
-    }
-
-    if(a == c) {
-      console.log("a==c");
-    }
-    else {
-      console.log("a!==c");
-    }
-    */
   },
 
-  getGoodsList: function() {
-    /*
-    request({ url: "/goods/search", data: this.goodParams }).then(
-      // 箭头函数,主要是匿名函数,result是传入参数
-      result => {
-        let goodList = result.data.message;
-        console.log(goodList);
-        this.maxPagenum = Math.ceil(goodList.total / this.goodParams.pagesize)
-        console.log("商品最大页数:" + this.maxPagenum);
+  bindStartDateChange: function(e) {
+    console.log(e);
 
-        // 数组拼接的第1种形式
-        // let list = this.data.goodList.concat(goodList.goods);
-        // console.log(list);
+    const date = new Date(e.detail.value);
+    console.log(date);
 
-        this.setData(
-          {
-            // 数组拼接的第2种形式,用于下载到底部时加载下一页数据
-            // es6方式 [...],list = [...list1,...list2,...list3]; push 单个元素:list.push('aaa');
-            goodList: [...this.data.goodList, ...goodList.goods],
-          }
-        );
-        // 获取数组的长度
-        // console.log(this.data.goodList.length);       
+    this.setData(
+      {
+        startShowTime: date.toLocaleDateString(),
+        startTime: Date.parse(date.toLocaleDateString() + " 00:00:00"),
       }
-    ).catch( //异常回调的函数
+    );
+  },
+
+  bindEndDateChange: function(e) {
+
+    const date = new Date(e.detail.value);
+    let tomorrow = Date.parse(date.toLocaleDateString() + " 00:00:00") + 24*60*60*1000;
+
+    this.setData(
+      {
+        endShowTime: date.toLocaleDateString(),
+        endTime: tomorrow,
+      }
+    );
+  },
+
+  getDeviceRealTimeData: function() {
+    const data = JSON.stringify(this.realTimeParamsReq);
+
+    util.httpRequest({
+      url: globalData.urlList.deviceRealTimeUrl,
+      data: data,
+      header: {
+        // userName: globalData.storeList.userName
+        userName: 'admin'
+      },
+      timeout: 3000,
+    }).then(
+      result => {
+        if (result.code == globalData.codeList.success) {
+          console.log(result);
+          const data = result.data;
+          // 用于测试
+          // const data = globalData.deviceRealTimeDataS;
+          this.setData(
+            {deviceRealTimeData:data}
+          );
+        } else {
+          const data = {time:util.formatTime2(new Date())};
+          
+          // 获取数据失败时,显示当前时间
+          this.setData(
+            {deviceRealTimeData:data}
+          );
+
+          wx.showToast({
+            title: result.message,
+            icon: 'none',
+          });
+        }
+
+         // 当请求完数据,停止下拉刷新
+         wx.stopPullDownRefresh();
+      }
+    ).catch(
       err => {
         console.log(err);
       }
-    ).finally(
-      res => {
-        // 当请求完数据,停止下拉刷新
-        wx.stopPullDownRefresh();
-      }
     );
-    */
+},
+
+getDeviceHistoryData: function() {
+
+  this.historyParamsReq.startTime = this.data.startTime;
+  this.historyParamsReq.endTime = this.data.endTime;
+
+  const data = JSON.stringify(this.historyParamsReq);
+  console.log(data);
+
+  util.httpRequest({
+    url: globalData.urlList.deviceHistoryUrl,
+    data: data,
+    header: {
+      // userName: globalData.storeList.userName
+      userName: 'admin'
+    },
+    timeout: 3000,
+  }).then(
+    result => {
+      if (result.code == globalData.codeList.success) {
+        console.log(result);
+        const data = result.data;
+
+        console.log(data);
+        // 用于测试
+        // const data = globalData.deviceHistoryDataS;
+        data.historyData = this.data.deviceHistoryData.historyData.concat(data.historyData); //数组进行拼接
+        console.log(data.historyData.length);
+        
+        if(data.historyData.length > 0) {
+          this.maxPageNum = Math.ceil(data.pageTotal / this.historyParamsReq.pageSize);
+
+          this.setData(
+            {deviceHistoryData:data}
+          );
+  
+          //存储历史数据
+          const cacheKey = this.historyParamsReq.taskNum + "_" + this.historyParamsReq.deviceNum + "_" + 'cacheData';
+          wx.setStorageSync(cacheKey, {startShowTime: this.data.startShowTime,endShowTime: this.data.endShowTime,startTime: this.data.startTime,endTime: this.data.endTime,deviceHistoryData: this.data.deviceHistoryData});
+        }
+      } else {
+        
+      }
+
+       // 当请求完数据,停止下拉刷新
+       wx.stopPullDownRefresh();
+    }
+  ).catch(
+    err => {
+      console.log(err);
+    }
+  );
 },
 
   /**
@@ -377,9 +221,49 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-    this.goodParams.cid = options.cid
 
-    this.getGoodsList();
+    // 设置显示设备的名称
+    wx.setNavigationBarTitle({
+      title: options.deivceName,
+    })
+
+    // 设置实时数据请求参数
+    this.realTimeParamsReq.taskNum = options.taskNum;
+    this.realTimeParamsReq.deviceNum = options.deviceNum;
+
+    // 设置历史数据请求参数
+    this.historyParamsReq.taskNum = options.taskNum;
+    this.historyParamsReq.deviceNum = options.deviceNum;
+
+    this.getDeviceRealTimeData();
+
+    const cacheKey = this.historyParamsReq.taskNum + "_" + this.historyParamsReq.deviceNum + "_" + 'cacheData';
+    const cacheData = wx.getStorageSync(cacheKey);
+
+    if(cacheData) { //有缓存数据
+      console.log(cacheKey + "存在缓存数据");
+      this.setData(
+        {
+          startShowTime: cacheData.startShowTime,
+          endShowTime: cacheData.endShowTime,
+          startTime: cacheData.startTime,
+          endTime: cacheData.endTime,
+          deviceHistoryData: cacheData
+        }
+      );
+    }
+    else { //没有缓存数据
+      console.log(cacheKey + "不存在缓存数据");
+      const date = new Date();
+      this.setData(
+        {
+          startShowTime: date.toLocaleDateString(),
+          endShowTime: date.toLocaleDateString(),
+          startTime: Date.parse(new Date(date.toLocaleDateString())),
+          endTime: Date.parse(new Date())
+        }
+      );
+    }
   },
 
   /**
@@ -414,26 +298,35 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.goodParams.pagenum = 1,
-    this.data.goodList = []
-    this.getGoodsList()
+  
+    if(this.index == 0) {
+      console.log('实时数据,监听数据下拉动作...');
+      this.getDeviceRealTimeData();
+    }
+    else {
+      console.log('历史数据,监听数据下拉动作...');
+      this.historyParamsReq.pageNum = 1;
+      this.data.deviceHistoryData.historyData = [];
+      this.getDeviceHistoryData();
+    }
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log("监听底部上啦事件");
-    if(this.goodParams.pagenum >= this.maxPagenum)
-    {
-      wx.showToast({
-        title: '已经没有数据啦',
-        icon: 'none',
-      })
-    }
-    else {
-      this.goodParams.pagenum++;
-      this.getGoodsList()
+
+    if(this.index == 1) {
+      if(this.historyParamsReq.pageNum >= this.maxPageNum) {
+        wx.showToast({
+          title: '已经没有数据啦',
+          icon: 'none',
+        });
+      }
+      else {
+        this.historyParamsReq.pageNum++;
+        this.getDeviceHistoryData();
+      }
     }
   },
 

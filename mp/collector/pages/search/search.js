@@ -1,183 +1,97 @@
-// pages/search/search.js
+// 导入全局变量
+const globalData = require('../../global/data.js');
+const util = require('../../utils/util.js');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    scrollTop: 0,
-    // 存储输入框的值
     inputValue: '',
+    showClearFlag: false,
     records: [
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      },
-      {
-        task:'任务二',
-        device:'设备二'
-      },
-      {
-        task:'任务一',
-        device:'设备一'
-      }
     ],
   },
-
+// 定义一个定时器
   timeId: -1,
+// 定义查询数据
+  searchDataReq: {
+    param: ''
+  },
+
+  searchList: function (e) {
+
+    this.searchDataReq.param = this.data.inputValue;
+    const data = JSON.stringify(this.searchDataReq);
+    console.log(data);
+
+    util.httpRequest({
+      url: globalData.urlList.searchUrl,
+      data: data,
+      header: {
+        // userName: globalData.storeList.userName
+        userName: 'admin'
+      },
+      timeout: 3000,
+    }).then(
+      result => {
+        if (result.code == globalData.codeList.success) {
+
+          const data = result.data;
+
+          this.setData(
+            {records: data}
+          );
+        } else {
+          
+        }
+      }
+    ).catch(
+      err => {
+        console.log(err);
+      }
+    );
+
+  },
+
+  getfocus: function (e) {
+
+  },
+
+  clearInput: function (e) {
+
+    this.setData({
+      inputValue: '',
+      showClearFlag: false,
+      records:[]
+      })
+  },
 
   // 通过该函数可以获取到组件的各种参数值
   inputChange: function (e) {
+
     const value = e.detail.value.trim();
     console.log("输入框值:" + value);
 
     // 判断输入数据的有效性
     if (value) {
       this.setData({
-        inputValue: value
+        inputValue: value,
+        showClearFlag: true
       });
 
-      // 动态修改导航栏的标题
-      // wx.setNavigationBarTitle(
-      //   {
-      //     title: this.data.inputValue
-      //   }
-      // );
-
-      console.log("输入结束时间:" + Date.now());
       clearInterval(this.timeId);
       // 设置定时器
       this.timeId = setTimeout(() => {
-        console.log("真正请求时间:" +Date.now());
+        // 延时请求数据
+        this.searchList();
       }, 1000);
+    }
+    else {
+      this.setData({
+        showClearFlag: false
+      });
     }
   },
   /**

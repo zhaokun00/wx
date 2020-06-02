@@ -4,7 +4,7 @@ page {
 }
 
 .real {
-  height: calc(100vh - 80rpx);
+  /* height: calc(100vh - 80rpx); */
   overflow-y:auto;
 }
 
@@ -161,4 +161,6 @@ page {
   padding: 0 2%;
   border-radius: 30rpx;
   font-weight: bold;
+  width: 30%;
+  text-align: center;
 }

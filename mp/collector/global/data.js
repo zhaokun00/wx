@@ -1,7 +1,6 @@
 /**
  * 定义全局的变量
  */
-
  const tipList = {
   loginFailed: '账号或密码错误',
   netFailed: '无网络连接',
@@ -13,15 +12,24 @@
   success: 200
  };
 
+//  定义存储变量
+let storeList = {
+  userName: ''
+};
+
 //  定义urllist
-// const basePath = 'http://localhost:8080';
-const basePath = 'http://smartdeviceclub.com:8080';
+const basePath = 'https://114.55.171.27';
 const urlList = {
-  loginUrl: basePath + '/user/login'
+  loginUrl: basePath + '/user/login',
+  taskUrl:  basePath + '/task/list',
+  deviceRealTimeUrl:  basePath + '/data/query/realtime/app',
+  deviceHistoryUrl: basePath + '/data/query/history/app',
+  searchUrl: basePath + '/task/list/search',
 };
 
 module.exports = {
   urlList: urlList,
   codeList: codeList,
   tipList: tipList,
+  storeList: storeList,
 }

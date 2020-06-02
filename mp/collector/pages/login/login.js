@@ -32,13 +32,16 @@ Page({
   },
 
   passwordBlur: function (e) {
+
     const password = e.detail.value;
+
     if (password != "") {
       this.userInfo.password = password;
     }
   },
 
   login: function (e) {
+
     const data = JSON.stringify(this.userInfo);
     console.log(data);
 
@@ -61,7 +64,9 @@ Page({
     }).then(
       result => {
         console.log(result.code);
+        
         if (result.code == globalData.codeList.success) {
+          globalData.storeList.userName = this.userInfo.userName;
           wx.redirectTo({
             url: '/pages/index/index',
           });

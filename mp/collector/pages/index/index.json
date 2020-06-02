@@ -3,5 +3,6 @@
   "searchInput":"../../components/searchInput/searchInput"
   },
   "navigationBarTitleText": "任务列表",
-  "enablePullDownRefresh":false
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }
