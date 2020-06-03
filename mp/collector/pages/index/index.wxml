@@ -9,7 +9,7 @@
 				<view class="devices_container">
 					<navigator wx:for="{{item1.devices}}" wx:for-item="item2" wx:for-index="index2" wx:key="deviceNum" url="/pages/devices/devices?taskNum={{item1.taskNum}}&&deviceNum={{item2.deviceNum}}&&deivceName={{item2.deviceName}}">				
 						<view> 
-							<image src="../../icons/device_001.jpg" mode="widthFix" />
+							<image src="{{item2.img?item2.img:'../../icons/device_default.jpg'}}" mode="widthFix" />
 							<view class="device_name">{{item2.deviceName}}</view>
 						</view>
 					</navigator>

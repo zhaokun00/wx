@@ -31,7 +31,7 @@ const request = (params) => {
       ...params,
       method: 'POST',
       success: (result) => {
-        console.log(result);
+        // console.log(result);
         resolve(result.data);
       },
       fail: (err) => {

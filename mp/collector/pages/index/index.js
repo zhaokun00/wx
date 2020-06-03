@@ -8,7 +8,7 @@ Page({
     // 第几页
     pageNum: 1,
     // 每页第几页
-    pageSize: 10
+    pageSize: 20
   },
 
   /**
@@ -42,7 +42,7 @@ Page({
         // 用于测试
         // const data = globalData.taskListS;
           data.tasks = this.data.taskList.concat(data.tasks); //数组进行拼接
-          console.log(data);
+          // console.log(data);
           this.maxPageNum = Math.ceil(data.total / this.taskParams.pageSize);
           this.setData(
             {taskList: result.data.tasks}
@@ -57,6 +57,10 @@ Page({
     ).catch(
       err => {
         console.log(err);
+        wx.showToast({
+          title: globalData.tipList.netFailed,
+          icon: 'none',
+        })
       }
     );
     // 当请求完数据,停止下拉刷新

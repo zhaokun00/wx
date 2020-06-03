@@ -63,11 +63,16 @@ Page({
     deviceNum: '',
     startTime: 0,
     endTime: 0,
-    pageSize: 1,
-    pageNum: 10,
+    pageSize: 48,
+    pageNum: 1,
   },
 
   maxPageNum: 1,
+
+  initHistoryData: function (e) {
+    this.historyParamsReq.pageNum = 1;
+    this.data.deviceHistoryData.historyData = [];
+  },
 
   tabsItemChange: function (e) {
     console.log(e);
@@ -87,6 +92,7 @@ Page({
       this.getDeviceRealTimeData();
     }
     else {
+      this.initHistoryData();
       this.getDeviceHistoryData();
     }
   },
@@ -95,27 +101,38 @@ Page({
     console.log(e);
 
     const date = new Date(e.detail.value);
-    console.log(date);
 
     this.setData(
       {
         startShowTime: date.toLocaleDateString(),
-        startTime: Date.parse(date.toLocaleDateString() + " 00:00:00"),
+        startTime: Date.parse(date.toLocaleDateString() + " 00:00:00") / 1000,
       }
     );
+
+    if(this.data.endTime >= this.data.startTime) {
+      this.initHistoryData();
+      this.getDeviceHistoryData();
+    }
+
   },
 
   bindEndDateChange: function(e) {
 
     const date = new Date(e.detail.value);
-    let tomorrow = Date.parse(date.toLocaleDateString() + " 00:00:00") + 24*60*60*1000;
+    let tomorrow = Date.parse(date.toLocaleDateString() + " 00:00:00") / 1000 + 24*60*60;
 
     this.setData(
       {
         endShowTime: date.toLocaleDateString(),
         endTime: tomorrow,
+
       }
     );
+
+    if(this.data.endTime >= this.data.startTime) {
+      this.initHistoryData();
+      this.getDeviceHistoryData();
+    }
   },
 
   getDeviceRealTimeData: function() {
@@ -159,6 +176,10 @@ Page({
     ).catch(
       err => {
         console.log(err);
+        wx.showToast({
+          title: globalData.tipList.netFailed,
+          icon: 'none',
+        })
       }
     );
 },
@@ -189,8 +210,8 @@ getDeviceHistoryData: function() {
         // 用于测试
         // const data = globalData.deviceHistoryDataS;
         data.historyData = this.data.deviceHistoryData.historyData.concat(data.historyData); //数组进行拼接
-        console.log(data.historyData.length);
         
+        console.log("当前长度:" + data.historyData.length);
         if(data.historyData.length > 0) {
           this.maxPageNum = Math.ceil(data.pageTotal / this.historyParamsReq.pageSize);
 
@@ -199,11 +220,14 @@ getDeviceHistoryData: function() {
           );
   
           //存储历史数据
-          const cacheKey = this.historyParamsReq.taskNum + "_" + this.historyParamsReq.deviceNum + "_" + 'cacheData';
-          wx.setStorageSync(cacheKey, {startShowTime: this.data.startShowTime,endShowTime: this.data.endShowTime,startTime: this.data.startTime,endTime: this.data.endTime,deviceHistoryData: this.data.deviceHistoryData});
+          // const cacheKey = this.historyParamsReq.taskNum + "_" + this.historyParamsReq.deviceNum + "_" + 'cacheData';
+          // wx.setStorageSync(cacheKey, {startShowTime: this.data.startShowTime,endShowTime: this.data.endShowTime,startTime: this.data.startTime,endTime: this.data.endTime,deviceHistoryData: this.data.deviceHistoryData});
         }
       } else {
-        
+        wx.showToast({
+          title: result.message,
+          icon: 'none',
+        });
       }
 
        // 当请求完数据,停止下拉刷新
@@ -212,6 +236,10 @@ getDeviceHistoryData: function() {
   ).catch(
     err => {
       console.log(err);
+      wx.showToast({
+        title: globalData.tipList.netFailed,
+        icon: 'none',
+      })
     }
   );
 },
@@ -237,6 +265,7 @@ getDeviceHistoryData: function() {
 
     this.getDeviceRealTimeData();
 
+    /*
     const cacheKey = this.historyParamsReq.taskNum + "_" + this.historyParamsReq.deviceNum + "_" + 'cacheData';
     const cacheData = wx.getStorageSync(cacheKey);
 
@@ -248,7 +277,7 @@ getDeviceHistoryData: function() {
           endShowTime: cacheData.endShowTime,
           startTime: cacheData.startTime,
           endTime: cacheData.endTime,
-          deviceHistoryData: cacheData
+          deviceHistoryData: cacheData.deviceHistoryData
         }
       );
     }
@@ -259,11 +288,23 @@ getDeviceHistoryData: function() {
         {
           startShowTime: date.toLocaleDateString(),
           endShowTime: date.toLocaleDateString(),
-          startTime: Date.parse(new Date(date.toLocaleDateString())),
-          endTime: Date.parse(new Date())
+          startTime: Date.parse(new Date(date.toLocaleDateString())) / 1000,
+          endTime: Date.parse(new Date()) / 1000
         }
       );
     }
+    */
+
+   const date = new Date();
+   this.setData(
+     {
+       startShowTime: date.toLocaleDateString(),
+       endShowTime: date.toLocaleDateString(),
+       startTime: Date.parse(new Date(date.toLocaleDateString())) / 1000,
+      //  endTime: Date.parse(new Date()) / 1000
+      endTime: Date.parse(date.toLocaleDateString() + " 00:00:00") / 1000 + 24*60*60
+     }
+   );
   },
 
   /**
@@ -305,8 +346,14 @@ getDeviceHistoryData: function() {
     }
     else {
       console.log('历史数据,监听数据下拉动作...');
-      this.historyParamsReq.pageNum = 1;
-      this.data.deviceHistoryData.historyData = [];
+      this.initHistoryData();
+      /*
+      const cacheKey = this.historyParamsReq.taskNum + "_" + this.historyParamsReq.deviceNum + "_" + 'cacheData';
+      const cacheData = wx.getStorageSync(cacheKey);
+      if(cacheData) {
+        wx.clearStorageSync();
+      }
+      */
       this.getDeviceHistoryData();
     }
   },

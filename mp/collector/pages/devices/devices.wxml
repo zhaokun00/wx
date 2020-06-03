@@ -31,13 +31,13 @@
 							</picker>
 						</view>
 
-						<view class="h_device" wx:for="{{deviceHistoryData.historyData}}" wx:for-index="index1" wx:for-item="item1" wx:key="time">
+						<view class="h_device" wx:for="{{deviceHistoryData.historyData}}" wx:for-index="index1" wx:for-item="item1" wx:key="*this">
 							<view class="h_te">
 							<view class="h_head_time">
 								<view class="h_time">{{item1.time}}</view>
 							</view>
 								<view class="h_row_element">
-									<view class="h_element" wx:for="{{item1.attributes}}" wx:for-index="index2" wx:for-item="item2" wx:key="attributeName">
+									<view class="h_element" wx:for="{{item1.attributes}}" wx:for-index="index2" wx:for-item="item2" wx:key="*this">
 										<view class="h_t_value">{{item2.attributeValue}}</view>
 										<view class="h_device_name">{{item2.attributeName}}</view>
 									</view>
