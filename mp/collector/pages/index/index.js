@@ -17,56 +17,65 @@ Page({
   data: {
 
     // 任务列表
-    taskList:[],
-    
+    taskList: [],
+
   },
 
   maxPageNum: 1,
+  isRequestDuring: false,
 
   getTaskList: function () {
-    const data = JSON.stringify(this.taskParams);
-    console.log(data);
+    if (this.isRequestDuring == false) {
+      this.isRequestDuring = true;
+      const data = JSON.stringify(this.taskParams);
+      console.log(data);
 
-    util.httpRequest({
-      url: globalData.urlList.taskUrl,
-      data: data,
-      header: {
-        // userName: globalData.storeList.userName
-        userName: 'admin'
-      },
-      timeout: 3000,
-    }).then(
-      result => {
-        if (result.code == globalData.codeList.success) {
-          const data = result.data;
-        // 用于测试
-        // const data = globalData.taskListS;
-          data.tasks = this.data.taskList.concat(data.tasks); //数组进行拼接
-          // console.log(data);
-          this.maxPageNum = Math.ceil(data.total / this.taskParams.pageSize);
-          this.setData(
-            {taskList: result.data.tasks}
-          );
-        } else {
+      util.httpRequest({
+        url: globalData.urlList.taskUrl,
+        data: data,
+        header: {
+          userName: globalData.storeList.userName
+          // userName: 'admin'
+        },
+        timeout: 3000,
+      }).then(
+        result => {
+          if (result.code == globalData.codeList.success) {
+            const data = result.data;
+            data.tasks = this.data.taskList.concat(data.tasks); //数组进行拼接
+            // console.log(data);
+            this.maxPageNum = Math.ceil(data.total / this.taskParams.pageSize);
+            this.setData({
+              taskList: result.data.tasks
+            });
+          } else {
+            wx.showToast({
+              title: result.message,
+              icon: 'none',
+            });
+          }
+
+          this.isRequestDuring = false;
+        }
+      ).catch(
+        err => {
+          this.isRequestDuring = false;
+          console.log(err);
           wx.showToast({
-            title: result.message,
+            title: globalData.tipList.netFailed,
             icon: 'none',
           });
         }
-      }
-    ).catch(
-      err => {
-        console.log(err);
-        wx.showToast({
-          title: globalData.tipList.netFailed,
-          icon: 'none',
-        })
-      }
-    );
+      );
+    }
+    else {
+      console.log("任务页面正在请求中...");
+    }
+
     // 当请求完数据,停止下拉刷新
     wx.stopPullDownRefresh();
   },
-  
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -118,13 +127,12 @@ Page({
   onReachBottom: function () {
     console.log("onReachBottom");
 
-    if(this.taskParams.pageNum >= this.maxPageNum) {
+    if (this.taskParams.pageNum >= this.maxPageNum) {
       wx.showToast({
         title: '已经没有数据啦',
         icon: 'none',
       });
-    }
-    else {
+    } else {
       this.taskParams.pageNum++;
       this.getTaskList();
     }

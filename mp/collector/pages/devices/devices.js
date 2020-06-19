@@ -71,7 +71,11 @@ Page({
 
   initHistoryData: function (e) {
     this.historyParamsReq.pageNum = 1;
-    this.data.deviceHistoryData.historyData = [];
+    const data = {historyData:[]};
+
+    this.setData({
+      deviceHistoryData: data
+    });
   },
 
   tabsItemChange: function (e) {
@@ -101,38 +105,54 @@ Page({
     console.log(e);
 
     const date = new Date(e.detail.value);
+    let setStartTime = Date.parse(date.toLocaleDateString() + " 00:00:00") / 1000;
 
     this.setData(
       {
-        startShowTime: date.toLocaleDateString(),
-        startTime: Date.parse(date.toLocaleDateString() + " 00:00:00") / 1000,
+        // startShowTime: date.toLocaleDateString(),
+        startShowTime: util.formatTime3(date),
+        startTime: setStartTime,
       }
     );
 
-    if(this.data.endTime >= this.data.startTime) {
-      this.initHistoryData();
-      this.getDeviceHistoryData();
+    if(setStartTime >= this.data.endTime) { //判断如果开始时间,重新设置结束时间
+      this.setData(
+        {
+          endShowTime: util.formatTime3(date),
+          endTime: setStartTime + 24*60*60,
+        }
+      );
     }
 
+    this.initHistoryData();
+    this.getDeviceHistoryData();
   },
 
   bindEndDateChange: function(e) {
 
     const date = new Date(e.detail.value);
-    let tomorrow = Date.parse(date.toLocaleDateString() + " 00:00:00") / 1000 + 24*60*60;
+    let setTime = Date.parse(date.toLocaleDateString() + " 00:00:00") / 1000;
+
+    if(setTime < this.data.startTime) {
+      wx.showToast({
+        title: globalData.tipList.historyTime,
+        icon: 'none',
+      });
+      return;
+    }
+
+    let tomorrow = setTime + 24*60*60;
 
     this.setData(
       {
-        endShowTime: date.toLocaleDateString(),
+        // endShowTime: date.toLocaleDateString(),
+        endShowTime: util.formatTime3(date),
         endTime: tomorrow,
-
       }
     );
 
-    if(this.data.endTime >= this.data.startTime) {
       this.initHistoryData();
       this.getDeviceHistoryData();
-    }
   },
 
   getDeviceRealTimeData: function() {
@@ -150,7 +170,10 @@ Page({
       result => {
         if (result.code == globalData.codeList.success) {
           console.log(result);
-          const data = result.data;
+          var data = result.data;
+          data.attributes.forEach(
+            (v, i) => v.attributeValue === null ? v.attributeValue="---" : v.attributeValue=v.attributeValue
+          )
           // 用于测试
           // const data = globalData.deviceRealTimeDataS;
           this.setData(
@@ -184,64 +207,80 @@ Page({
     );
 },
 
+isRequestHistroyDuring: false,
+
 getDeviceHistoryData: function() {
 
-  this.historyParamsReq.startTime = this.data.startTime;
-  this.historyParamsReq.endTime = this.data.endTime;
-
-  const data = JSON.stringify(this.historyParamsReq);
-  console.log(data);
-
-  util.httpRequest({
-    url: globalData.urlList.deviceHistoryUrl,
-    data: data,
-    header: {
-      // userName: globalData.storeList.userName
-      userName: 'admin'
-    },
-    timeout: 3000,
-  }).then(
-    result => {
-      if (result.code == globalData.codeList.success) {
-        console.log(result);
-        const data = result.data;
-
-        console.log(data);
-        // 用于测试
-        // const data = globalData.deviceHistoryDataS;
-        data.historyData = this.data.deviceHistoryData.historyData.concat(data.historyData); //数组进行拼接
-        
-        console.log("当前长度:" + data.historyData.length);
-        if(data.historyData.length > 0) {
-          this.maxPageNum = Math.ceil(data.pageTotal / this.historyParamsReq.pageSize);
-
-          this.setData(
-            {deviceHistoryData:data}
-          );
+  if(this.isRequestHistroyDuring == false) {
+    this.isRequestHistroyDuring = true;
+    this.historyParamsReq.startTime = this.data.startTime;
+    this.historyParamsReq.endTime = this.data.endTime;
   
-          //存储历史数据
-          // const cacheKey = this.historyParamsReq.taskNum + "_" + this.historyParamsReq.deviceNum + "_" + 'cacheData';
-          // wx.setStorageSync(cacheKey, {startShowTime: this.data.startShowTime,endShowTime: this.data.endShowTime,startTime: this.data.startTime,endTime: this.data.endTime,deviceHistoryData: this.data.deviceHistoryData});
-        }
-      } else {
-        wx.showToast({
-          title: result.message,
-          icon: 'none',
-        });
-      }
+    const data = JSON.stringify(this.historyParamsReq);
+    console.log(data);
+  
+    util.httpRequest({
+      url: globalData.urlList.deviceHistoryUrl,
+      data: data,
+      header: {
+        userName: globalData.storeList.userName
+        // userName: 'admin'
+      },
+      timeout: 3000,
+    }).then(
+      result => {
+        if (result.code == globalData.codeList.success) {
+          console.log(result);
+          const data = result.data;
 
-       // 当请求完数据,停止下拉刷新
-       wx.stopPullDownRefresh();
-    }
-  ).catch(
-    err => {
-      console.log(err);
-      wx.showToast({
-        title: globalData.tipList.netFailed,
-        icon: 'none',
-      })
-    }
-  );
+          data.historyData = this.data.deviceHistoryData.historyData.concat(data.historyData); //数组进行拼接
+          
+          if(data.historyData.length > 0) {
+            this.maxPageNum = Math.ceil(data.pageTotal / this.historyParamsReq.pageSize);
+  
+            this.setData(
+              {deviceHistoryData:data}
+            );
+    
+            //存储历史数据
+            // const cacheKey = this.historyParamsReq.taskNum + "_" + this.historyParamsReq.deviceNum + "_" + 'cacheData';
+            // wx.setStorageSync(cacheKey, {startShowTime: this.data.startShowTime,endShowTime: this.data.endShowTime,startTime: this.data.startTime,endTime: this.data.endTime,deviceHistoryData: this.data.deviceHistoryData});
+          }
+          else{
+            //判断如果数据为空
+            if(this.data.deviceHistoryData.historyData.length == 0) {
+              console.log('ggggggggggggggggggggggggggg');
+              wx.showToast({
+                title: globalData.tipList.historyEmpty,
+                icon: 'none',
+              });
+            }
+          }
+        } else {
+          wx.showToast({
+            title: result.message,
+            icon: 'none',
+          });
+        }
+  
+         // 当请求完数据,停止下拉刷新
+         wx.stopPullDownRefresh();
+         this.isRequestHistroyDuring = false;
+      }
+    ).catch(
+      err => {
+        this.isRequestHistroyDuring = false;
+        console.log(err);
+        wx.showToast({
+          title: globalData.tipList.netFailed,
+          icon: 'none',
+        })
+      }
+    );
+  }
+  else {
+    console.log("设备页面正在请求中...");
+  }
 },
 
   /**
@@ -298,8 +337,10 @@ getDeviceHistoryData: function() {
    const date = new Date();
    this.setData(
      {
-       startShowTime: date.toLocaleDateString(),
-       endShowTime: date.toLocaleDateString(),
+      //  startShowTime: date.toLocaleDateString(),
+      //  endShowTime: date.toLocaleDateString(),
+       startShowTime: util.formatTime3(date),
+       endShowTime: util.formatTime3(date),
        startTime: Date.parse(new Date(date.toLocaleDateString())) / 1000,
       //  endTime: Date.parse(new Date()) / 1000
       endTime: Date.parse(date.toLocaleDateString() + " 00:00:00") / 1000 + 24*60*60

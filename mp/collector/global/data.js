@@ -4,7 +4,10 @@
  const tipList = {
   loginFailed: '账号或密码错误',
   netFailed: '无网络连接',
-  accountError: '账号或密码不能为空'
+  accountError: '账号或密码不能为空',
+  historyTime: '结束时间不能小于开始时间',
+  historyEmpty: '该时间段暂无历史数据',
+  knowledge: '请先联系厂家获取账号再登录'
  };
 
 //  定义常量list
@@ -18,7 +21,7 @@ let storeList = {
 };
 
 //  定义urllist
-const basePath = 'https://114.55.171.27';
+const basePath = 'https://hlbr.smartdeviceclub.com';
 const urlList = {
   loginUrl: basePath + '/user/login',
   taskUrl:  basePath + '/task/list',

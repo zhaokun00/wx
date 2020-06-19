@@ -20,6 +20,14 @@ const formatTime2 = date => {
   return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
+const formatTime3 = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+
+  return [year, month, day].map(formatNumber).join('-')
+}
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
@@ -45,5 +53,6 @@ const request = (params) => {
 module.exports = {
   formatTime: formatTime,
   httpRequest: request,
-  formatTime2: formatTime2
+  formatTime2: formatTime2,
+  formatTime3: formatTime3
 }

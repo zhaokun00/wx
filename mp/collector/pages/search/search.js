@@ -30,8 +30,8 @@ Page({
       url: globalData.urlList.searchUrl,
       data: data,
       header: {
-        // userName: globalData.storeList.userName
-        userName: 'admin'
+        userName: globalData.storeList.userName
+        // userName: 'admin'
       },
       timeout: 3000,
     }).then(

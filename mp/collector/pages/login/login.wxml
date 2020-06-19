@@ -8,9 +8,12 @@
 	<view class="hr"></view>
 	<view class="account">
 		<view class="title">密码</view>
-		<view class="num"><input bindblur="passwordBlur" placeholder="请输入密码" password placeholder-style="color:#999999;" /></view>
+		<view class="num"><input bindinput="passwordBlur" placeholder="请输入密码" password placeholder-style="color:#999999;" /></view>
 	</view>
 	<view class="hr"></view>
 	<button class="btn" type="primary" bindtap="login" style="width:90vw">登录</button>
-  
+	
+	<view class="tips" bindtap="knowledge">
+		<text class="">还没账号?马上了解</text>
+	</view>
 </view>

@@ -15,10 +15,15 @@ Page({
   },
 
   accountInput: function (e) {
+    console.log("fffffffffffffffffffff");
     const username = e.detail.value;
+
+    this.userInfo.userName = username;
+/*
     if (username != "") {
       this.userInfo.userName = username;
     }
+*/
     /*
         //变量定义在data数据中
         if (username != "") {
@@ -35,15 +40,17 @@ Page({
 
     const password = e.detail.value;
 
+    this.userInfo.password = password;
+/*
     if (password != "") {
       this.userInfo.password = password;
     }
+*/
   },
 
   login: function (e) {
 
     const data = JSON.stringify(this.userInfo);
-    console.log(data);
 
     if (this.userInfo.userName == "" || this.userInfo.password == "") {
       wx.showToast({
@@ -86,6 +93,14 @@ Page({
         })
       }
     );
+  },
+
+  knowledge: function() {
+    wx.showToast({
+      title: globalData.tipList.knowledge,
+      icon: 'none',
+      duration: 3000,
+    })
   },
 
   /**

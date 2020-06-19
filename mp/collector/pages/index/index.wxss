@@ -53,8 +53,16 @@ page {
  
 .task_container .right_menu .task_devices .devices_container .device_name {
   border-top: 2rpx solid #ddd;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 } 
 
 .task_container .right_menu .task_devices .devices_container navigator image {
-  width: 50%;
+  margin-top: 10rpx;
+  width: 70%;
+  height: 100rpx;
 }

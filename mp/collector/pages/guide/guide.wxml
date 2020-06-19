@@ -1,0 +1,15 @@
+<!--pages/login/login.wxml-->
+<view class="root">
+  <image class="production_image" src="../../icons/logo.jpg" mode="cover"></image>
+	<view class="summary">
+  <text class="title">HLBR自动测温系统</text>
+  <view class="summary_content">
+    <text class="content">实时查询温度</text>
+    <text class="content">历史查询温度</text>
+  </view>
+
+  </view>
+		
+	<button class="btn" type="primary" bindtap="start" style="width:90vw">开始使用</button>
+	
+</view>

@@ -16,7 +16,7 @@
 
 			<block wx:if="{{tabs[1].isActive===true}}">
 				<view class="history">
-					<scroll-view scroll-y scroll-top="{{scrollTop}}">
+					<scroll-view scroll-y scroll-top="0">
 						<view class="picker_group">
 							<picker mode="date" value="{{startTime}}" end="{{endTime}}" bindchange="bindStartDateChange">
 								<view class="picker">
