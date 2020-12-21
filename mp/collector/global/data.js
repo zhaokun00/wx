@@ -21,7 +21,8 @@ let storeList = {
 };
 
 //  定义urllist
-const basePath = 'https://hlbr.smartdeviceclub.com';
+// const basePath = 'https://hlbr.smartdeviceclub.com';
+const basePath = 'https://smartdeviceclub.cn';
 const urlList = {
   loginUrl: basePath + '/user/login',
   taskUrl:  basePath + '/task/list',
